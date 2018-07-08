@@ -5,9 +5,11 @@ import { Component, Input } from '@angular/core';
     template:
         `
     <div (click)=toggleContent() class="well pointable">
-        <h4>{{title}}</h4>
+        <h4>
+        <ng-content select="[well-title]"></ng-content>
+        </h4>
 
-        <ng-content *ngIf="visible"></ng-content>
+        <ng-content *ngIf="visible" select="[well-body]"></ng-content>
     </div>
     `
 })
