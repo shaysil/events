@@ -13,7 +13,11 @@ import { IEvent, ISession } from '../shared';
 })
 export class EventsDetailsComponent implements OnInit {
     event: IEvent;
-    addMode:boolean
+    addMode: boolean;
+    filterBy: string = 'all';
+    sortBy: string = 'name';
+
+
     constructor(private eventservice: EventService, private activeroute: ActivatedRoute) {
 
     }
@@ -23,15 +27,15 @@ export class EventsDetailsComponent implements OnInit {
     addSession() {
         this.addMode = true
     }
-    saveNewSession(session:ISession){
-        const nextId=Math.max.apply(null,this.event.sessions.map(s=>s.id));
-        session.id = nextId+1
+    saveNewSession(session: ISession) {
+        const nextId = Math.max.apply(null, this.event.sessions.map(s => s.id));
+        session.id = nextId + 1
         this.event.sessions.push(session)
         this.eventservice.updateEvent(this.event)
-        this.addMode=false
+        this.addMode = false
     }
-    cancelAddSession(){
-        this.addMode=false
+    cancelAddSession() {
+        this.addMode = false
     }
 }
 
