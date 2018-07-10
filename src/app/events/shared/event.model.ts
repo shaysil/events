@@ -18,6 +18,7 @@ export interface IEvent{
 export interface ISession{
 
     id:number
+
     name:string
     presenter:string
     duration:number
