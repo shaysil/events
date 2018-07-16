@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import {HttpClientModule} from '@angular/common/http'
 import {
   EventsListComponent,
   EventsThumbnailComponent,
@@ -13,7 +14,10 @@ import {
   EditEventComponent,
   CreateSessionComponent,
   SessionListComponent,
-  DurationPipe
+  DurationPipe,
+  UpvoteComponent,
+  VoterService,
+  LocationValidator
 } from './events/index'
 
 import {JQ_TOKEN,
@@ -38,9 +42,10 @@ let jQuery = window['$']
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
+    FormsModule,  
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   declarations: [
     EventsAppComponent,
@@ -56,13 +61,16 @@ let jQuery = window['$']
     CollapsibleWellComponent,
     DurationPipe,
     simpleModalComponent,
-    ModalTriggerDirective
+    ModalTriggerDirective,
+    UpvoteComponent,
+    LocationValidator
   ],
   providers: [
     EventService,
     {provide: TOASTR_TOKEN,useValue:toastr},
     EventRouteActivator,
     AuthService,
+    VoterService,
     {provide:JQ_TOKEN,useValue:jQuery},
     {
       provide: 'canDeactivateCreateEvent',
